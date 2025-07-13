@@ -79,6 +79,7 @@ class LoginFormContent extends StatelessWidget {
                   hint: 'Enter your email',
                   prefixIcon: const Icon(Icons.email_outlined),
                   keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   onChanged: (value) =>
                       context.read<LoginCubit>().updateEmail(value),
                 ),
@@ -101,6 +102,9 @@ class LoginFormContent extends StatelessWidget {
                   obscureText: !state.isPasswordVisible,
                   onChanged: (value) =>
                       context.read<LoginCubit>().updatePassword(value),
+                  onFieldSubmitted: state.status == RequestState.loading
+                      ? null
+                      : (_) => context.read<LoginCubit>().login(),
                 ),
                 const SizedBox(height: 24),
 

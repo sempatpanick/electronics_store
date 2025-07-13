@@ -19,6 +19,7 @@ class TextInputWidget extends StatelessWidget {
   final bool autofocus;
   final FocusNode? focusNode;
   final VoidCallback? onTap;
+  final ValueChanged<String>? onFieldSubmitted;
   final bool readOnly;
 
   const TextInputWidget({
@@ -39,6 +40,7 @@ class TextInputWidget extends StatelessWidget {
     this.autofocus = false,
     this.focusNode,
     this.onTap,
+    this.onFieldSubmitted,
     this.readOnly = false,
   });
 
@@ -103,6 +105,7 @@ class TextInputWidget extends StatelessWidget {
           style: theme.textTheme.bodyLarge?.copyWith(
             color: enabled ? kTextPrimaryColor : Colors.grey.shade500,
           ),
+          onFieldSubmitted: onFieldSubmitted,
         ),
       ],
     );
