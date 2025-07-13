@@ -16,16 +16,23 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
 
   ProductDetailCubit() : super(ProductDetailState());
 
+  void initialize(String productId) {
+    // Only initialize if the productId has actually changed
+    if (state.productId != productId) {
+      emit(state.copyWith(productId: productId));
+      loadProduct(productId);
+    }
+  }
+
   Future<void> loadProduct(String productId) async {
     emit(state.copyWith(status: RequestState.loading));
 
     try {
       final productResult = await _productUseCase.getProductById(productId);
       productResult.fold(
-        (error) => emit(state.copyWith(
-          status: RequestState.error,
-          errorMessage: error,
-        )),
+        (error) => emit(
+          state.copyWith(status: RequestState.error, errorMessage: error),
+        ),
         (product) async {
           if (product != null) {
             emit(
@@ -92,16 +99,18 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     if (state.product == null) return;
 
     final result = await _favoritesUseCase.toggleFavorite(state.product!);
-    result.fold((error) => print('Error toggling favorite: $error'),
-        (isFavorite) {
+    result.fold((error) => print('Error toggling favorite: $error'), (
+      isFavorite,
+    ) {
       emit(state.copyWith(isFavorite: isFavorite));
     });
   }
 
   Future<void> _checkFavoriteStatus(String productId) async {
     final result = await _favoritesUseCase.isFavorite(productId);
-    result.fold((error) => print('Error checking favorite status: $error'),
-        (isFavorite) {
+    result.fold((error) => print('Error checking favorite status: $error'), (
+      isFavorite,
+    ) {
       emit(state.copyWith(isFavorite: isFavorite));
     });
   }

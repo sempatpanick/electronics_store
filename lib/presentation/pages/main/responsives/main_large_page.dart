@@ -9,7 +9,6 @@ class MainLargePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("MainLargePage");
     return Scaffold(
       body: Column(
         children: [

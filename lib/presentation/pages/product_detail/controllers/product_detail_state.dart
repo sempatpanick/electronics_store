@@ -3,6 +3,7 @@ part of 'product_detail_cubit.dart';
 class ProductDetailState {
   final RequestState status;
   final String? errorMessage;
+  final String? productId;
   final ProductEntity? product;
   final ProductVariantEntity? selectedVariant;
   final String? selectedColor;
@@ -15,6 +16,7 @@ class ProductDetailState {
   ProductDetailState({
     this.status = RequestState.none,
     this.errorMessage,
+    this.productId,
     this.product,
     this.selectedVariant,
     this.selectedColor,
@@ -28,6 +30,7 @@ class ProductDetailState {
   ProductDetailState copyWith({
     RequestState? status,
     String? errorMessage,
+    String? productId,
     ProductEntity? product,
     ProductVariantEntity? selectedVariant,
     String? selectedColor,
@@ -40,6 +43,7 @@ class ProductDetailState {
     return ProductDetailState(
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
+      productId: productId ?? this.productId,
       product: product ?? this.product,
       selectedVariant: selectedVariant ?? this.selectedVariant,
       selectedColor: selectedColor ?? this.selectedColor,

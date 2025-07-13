@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../common/colors.dart';
 import '../../../../common/enums.dart';
+import '../../../../common/navigation_service.dart';
 import '../controllers/product_detail_cubit.dart';
 import '../widgets/product_image_gallery.dart';
 import '../widgets/product_options.dart';
@@ -116,9 +117,7 @@ class ProductDetailContent extends StatelessWidget {
         // Left side - Product Images
         Expanded(
           flex: 1,
-          child: ProductImageGallery(
-            images: state.product!.images,
-          ),
+          child: ProductImageGallery(images: state.product!.images),
         ),
         const SizedBox(width: 32),
         // Right side - Product Options
@@ -194,8 +193,6 @@ class ProductDetailContent extends StatelessWidget {
   }
 
   Widget _buildSection3(BuildContext context, ProductDetailState state) {
-    return ProductReviews(
-      reviews: state.product!.reviewsList,
-    );
+    return ProductReviews(reviews: state.product!.reviewsList);
   }
 }

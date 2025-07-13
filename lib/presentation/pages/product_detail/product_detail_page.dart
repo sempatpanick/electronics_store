@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/colors.dart';
 import '../../widgets/bottom_navigation.dart';
@@ -7,27 +8,37 @@ import '../../widgets/top_navigation.dart';
 import 'contents/product_detail_content.dart';
 import 'controllers/product_detail_cubit.dart';
 
-class ProductDetailPage extends StatelessWidget {
-  final String productId;
+class ProductDetailPage extends StatefulWidget {
+  const ProductDetailPage({super.key});
 
-  const ProductDetailPage({super.key, required this.productId});
+  @override
+  State<ProductDetailPage> createState() => _ProductDetailPageState();
+}
+
+class _ProductDetailPageState extends State<ProductDetailPage> {
+  @override
+  void initState() {
+    super.initState();
+    // Initialize with current product ID
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final productId = GoRouterState.of(context).pathParameters['id'];
+      if (productId != null) {
+        context.read<ProductDetailCubit>().initialize(productId);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => ProductDetailCubit()..loadProduct(productId),
-        ),
-      ],
-      child: Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: size.width >= 600
-            ? const ProductDetailLargePage()
-            : const ProductDetailSmallPage(),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          backgroundColor: kBackgroundColor,
+          body: constraints.maxWidth >= 600
+              ? const ProductDetailLargePage()
+              : const ProductDetailSmallPage(),
+        );
+      },
     );
   }
 }

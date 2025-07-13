@@ -26,13 +26,14 @@ class AssetsDataSourceImpl implements AssetsDataSource {
     }
 
     try {
-    final String response =
-        await rootBundle.loadString('assets/json/products.json');
-    final List<dynamic> data = json.decode(response) as List<dynamic>;
-    _products = data
-        .map((json) => ProductModel.fromJson(json as Map<String, dynamic>))
-        .toList();
-    return _products!;
+      final String response = await rootBundle.loadString(
+        'assets/json/products.json',
+      );
+      final List<dynamic> data = json.decode(response) as List<dynamic>;
+      _products = data
+          .map((json) => ProductModel.fromJson(json as Map<String, dynamic>))
+          .toList();
+      return _products!;
     } catch (e) {
       throw Exception('Failed to load products: $e');
     }
@@ -75,8 +76,10 @@ class AssetsDataSourceImpl implements AssetsDataSource {
   @override
   Future<List<String>> getCategories() async {
     final products = await getProducts();
-    final categories =
-        products.map((product) => product.category).toSet().toList();
+    final categories = products
+        .map((product) => product.category)
+        .toSet()
+        .toList();
     categories.insert(0, 'All');
     return categories;
   }

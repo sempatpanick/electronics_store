@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../presentation/pages/login/login_page.dart';
 import '../presentation/pages/main/main_page.dart';
+import '../presentation/pages/product_detail/controllers/product_detail_cubit.dart';
 import '../presentation/pages/product_detail/product_detail_page.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/',
+  redirect: (context, state) {
+    // Handle product detail route parameter changes
+    if (state.matchedLocation.startsWith('/product/')) {
+      final productId = state.pathParameters['id'];
+      if (productId != null && productId.isNotEmpty) {
+        // Allow the route to proceed
+        return null;
+      }
+    }
+    return null;
+  },
   routes: [
     // Login route
     GoRoute(
@@ -69,8 +82,13 @@ final GoRouter router = GoRouter(
       path: '/product/:id',
       name: 'product-detail',
       pageBuilder: (context, state) {
-        final productId = state.pathParameters['id']!;
-        return NoTransitionPage(child: ProductDetailPage(productId: productId));
+        final productId = state.pathParameters['id'];
+        return NoTransitionPage(
+          child: BlocProvider(
+            create: (context) => ProductDetailCubit(),
+            child: ProductDetailPage(key: ValueKey(productId)),
+          ),
+        );
       },
     ),
   ],
