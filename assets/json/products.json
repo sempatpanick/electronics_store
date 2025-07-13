@@ -1,0 +1,629 @@
+[
+  {
+    "id": "1",
+    "name": "iPhone 15 Pro",
+    "brand": "Apple",
+    "category": "Smartphones",
+    "price": 999.99,
+    "originalPrice": 1099.99,
+    "image": null,
+    "images": [
+      "https://example.com/iphone15pro_1.jpg",
+      "https://example.com/iphone15pro_2.jpg",
+      "https://example.com/iphone15pro_3.jpg"
+    ],
+    "rating": 4.8,
+    "reviews_count": 1247,
+    "description": "The iPhone 15 Pro features the A17 Pro chip, the most advanced chip ever in a smartphone. With a titanium design, pro camera system, and all-day battery life, it's the ultimate iPhone for professionals.",
+    "specifications": {
+      "Display": "6.1-inch Super Retina XDR display",
+      "Chip": "A17 Pro chip with 6-core GPU",
+      "Camera": "Pro camera system with 48MP Main camera",
+      "Battery": "Up to 23 hours video playback",
+      "Storage": "128GB, 256GB, 512GB, 1TB",
+      "Connectivity": "5G, Wi-Fi 6E, Bluetooth 5.3"
+    },
+    "variants": [
+      { "name": "128GB", "price": 999.99, "available": true },
+      { "name": "256GB", "price": 1099.99, "available": true },
+      { "name": "512GB", "price": 1299.99, "available": true },
+      { "name": "1TB", "price": 1499.99, "available": false }
+    ],
+    "colors": [
+      "Natural Titanium",
+      "Blue Titanium",
+      "White Titanium",
+      "Black Titanium"
+    ],
+    "ramOptions": null,
+    "storageOptions": null,
+    "inStock": true,
+    "stockCount": 45,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "John D.",
+        "rating": 5,
+        "date": "2024-01-15",
+        "title": "Excellent phone!",
+        "comment": "The A17 Pro chip is incredibly fast and the camera quality is outstanding.",
+        "verified": true
+      },
+      {
+        "id": "2",
+        "user": "Sarah M.",
+        "rating": 4,
+        "date": "2024-01-10",
+        "title": "Great upgrade",
+        "comment": "Upgraded from iPhone 12 Pro and the difference is noticeable. Battery life is much better.",
+        "verified": true
+      },
+      {
+        "id": "3",
+        "user": "Mike R.",
+        "rating": 5,
+        "date": "2024-01-08",
+        "title": "Perfect for photography",
+        "comment": "The pro camera system is amazing. The 48MP photos are incredibly detailed.",
+        "verified": true
+      },
+      {
+        "id": "4",
+        "user": "Lisa K.",
+        "rating": 4,
+        "date": "2024-01-05",
+        "title": "Solid performance",
+        "comment": "Fast, reliable, and the titanium design feels premium. Worth the investment.",
+        "verified": true
+      },
+      {
+        "id": "5",
+        "user": "David L.",
+        "rating": 5,
+        "date": "2024-01-03",
+        "title": "Best iPhone yet",
+        "comment": "The combination of performance, camera, and design makes this the best iPhone I've owned.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Samsung Galaxy S24",
+    "brand": "Samsung",
+    "category": "Smartphones",
+    "price": 899.99,
+    "originalPrice": 999.99,
+    "image": null,
+    "images": [
+      "https://example.com/galaxys24_1.jpg",
+      "https://example.com/galaxys24_2.jpg",
+      "https://example.com/galaxys24_3.jpg"
+    ],
+    "rating": 4.7,
+    "reviews_count": 892,
+    "description": "Premium Android flagship with AI features. The Samsung Galaxy S24 offers cutting-edge technology with advanced AI capabilities, stunning display, and exceptional performance.",
+    "specifications": {
+      "Display": "6.2-inch Dynamic AMOLED 2X display",
+      "Chip": "Snapdragon 8 Gen 3",
+      "Camera": "Triple camera system with 50MP main",
+      "Battery": "4000mAh with 25W fast charging",
+      "Storage": "128GB, 256GB, 512GB",
+      "Connectivity": "5G, Wi-Fi 7, Bluetooth 5.3"
+    },
+    "variants": [
+      { "name": "128GB", "price": 899.99, "available": true },
+      { "name": "256GB", "price": 999.99, "available": true },
+      { "name": "512GB", "price": 1099.99, "available": true }
+    ],
+    "colors": ["Onyx Black", "Marble Gray", "Cobalt Violet", "Amber Yellow"],
+    "ramOptions": ["8GB", "12GB"],
+    "storageOptions": null,
+    "inStock": true,
+    "stockCount": 32,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Alex W.",
+        "rating": 5,
+        "date": "2024-01-14",
+        "title": "Amazing AI features",
+        "comment": "The AI capabilities are incredible. The phone understands context and helps with daily tasks.",
+        "verified": true
+      },
+      {
+        "id": "2",
+        "user": "Emma T.",
+        "rating": 4,
+        "date": "2024-01-12",
+        "title": "Great camera system",
+        "comment": "The camera quality is outstanding, especially in low light conditions.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "MacBook Pro 14\"",
+    "brand": "Apple",
+    "category": "Laptops",
+    "price": 1999.99,
+    "originalPrice": 2199.99,
+    "image": null,
+    "images": [
+      "https://example.com/macbookpro_1.jpg",
+      "https://example.com/macbookpro_2.jpg",
+      "https://example.com/macbookpro_3.jpg"
+    ],
+    "rating": 4.9,
+    "reviews_count": 567,
+    "description": "The MacBook Pro 14-inch with M3 chip delivers exceptional performance for professionals. With up to 22 hours of battery life and a stunning Liquid Retina XDR display.",
+    "specifications": {
+      "Display": "14.2-inch Liquid Retina XDR display",
+      "Chip": "M3 chip with 8-core CPU and 10-core GPU",
+      "Memory": "8GB, 16GB, 24GB unified memory",
+      "Storage": "512GB, 1TB, 2TB, 4TB SSD",
+      "Battery": "Up to 22 hours video playback",
+      "Ports": "MagSafe 3, Thunderbolt 4, HDMI 2.1, SDXC card slot"
+    },
+    "variants": null,
+    "colors": ["Space Black", "Silver"],
+    "ramOptions": ["8GB", "16GB", "24GB"],
+    "storageOptions": ["512GB", "1TB", "2TB", "4TB"],
+    "inStock": true,
+    "stockCount": 23,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Alex W.",
+        "rating": 5,
+        "date": "2024-01-14",
+        "title": "Incredible performance",
+        "comment": "The M3 chip is a game-changer. Handles everything I throw at it with ease.",
+        "verified": true
+      },
+      {
+        "id": "2",
+        "user": "Emma T.",
+        "rating": 5,
+        "date": "2024-01-12",
+        "title": "Perfect for development",
+        "comment": "As a software developer, this machine is perfect. Fast compilation and great battery life.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Dell XPS 13",
+    "brand": "Dell",
+    "category": "Laptops",
+    "price": 1299.99,
+    "originalPrice": 1499.99,
+    "image": null,
+    "images": [
+      "https://example.com/dellxps13_1.jpg",
+      "https://example.com/dellxps13_2.jpg"
+    ],
+    "rating": 4.6,
+    "reviews_count": 423,
+    "description": "Ultra-thin premium laptop with stunning InfinityEdge display. The Dell XPS 13 offers exceptional performance in a compact, elegant design perfect for professionals on the go.",
+    "specifications": {
+      "Display": "13.4-inch InfinityEdge display",
+      "Processor": "Intel Core i7-1355U",
+      "Memory": "16GB LPDDR5",
+      "Storage": "512GB PCIe NVMe SSD",
+      "Battery": "Up to 12 hours",
+      "Ports": "Thunderbolt 4, USB-C, microSD card reader"
+    },
+    "variants": null,
+    "colors": ["Platinum Silver", "Frost White"],
+    "ramOptions": ["8GB", "16GB", "32GB"],
+    "storageOptions": ["256GB", "512GB", "1TB", "2TB"],
+    "inStock": false,
+    "stockCount": 0,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Michael R.",
+        "rating": 4,
+        "date": "2024-01-10",
+        "title": "Great ultrabook",
+        "comment": "Perfect size and weight for travel. The display is beautiful and battery life is good.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Sony WH-1000XM5",
+    "brand": "Sony",
+    "category": "Audio",
+    "price": 349.99,
+    "originalPrice": 399.99,
+    "image": null,
+    "images": [
+      "https://example.com/sonywh1000xm5_1.jpg",
+      "https://example.com/sonywh1000xm5_2.jpg"
+    ],
+    "rating": 4.8,
+    "reviews_count": 2156,
+    "description": "Premium noise-canceling headphones with industry-leading sound quality. The Sony WH-1000XM5 delivers exceptional audio performance with advanced noise cancellation technology.",
+    "specifications": {
+      "Driver": "30mm dynamic driver",
+      "Frequency Response": "4Hz-40,000Hz",
+      "Battery Life": "Up to 30 hours",
+      "Connectivity": "Bluetooth 5.2, NFC",
+      "Weight": "250g",
+      "Features": "Touch controls, Speak-to-Chat, Quick Attention"
+    },
+    "variants": null,
+    "colors": ["Black", "Silver"],
+    "ramOptions": null,
+    "storageOptions": null,
+    "inStock": true,
+    "stockCount": 67,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Sarah L.",
+        "rating": 5,
+        "date": "2024-01-15",
+        "title": "Best noise cancellation",
+        "comment": "The noise cancellation is incredible. Perfect for flights and noisy environments.",
+        "verified": true
+      },
+      {
+        "id": "2",
+        "user": "David K.",
+        "rating": 4,
+        "date": "2024-01-12",
+        "title": "Excellent sound quality",
+        "comment": "The audio quality is outstanding. Bass is deep and highs are crisp.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "name": "AirPods Pro",
+    "brand": "Apple",
+    "category": "Audio",
+    "price": 249.99,
+    "originalPrice": 279.99,
+    "image": null,
+    "images": [
+      "https://example.com/airpodspro_1.jpg",
+      "https://example.com/airpodspro_2.jpg"
+    ],
+    "rating": 4.7,
+    "reviews_count": 3421,
+    "description": "Wireless earbuds with active noise cancellation and spatial audio. The AirPods Pro deliver immersive sound with seamless integration with Apple devices.",
+    "specifications": {
+      "Driver": "Custom high-excursion driver",
+      "Active Noise Cancellation": "Yes",
+      "Battery Life": "Up to 6 hours (with ANC)",
+      "Connectivity": "Bluetooth 5.0, H1 chip",
+      "Water Resistance": "IPX4",
+      "Features": "Spatial audio, Transparency mode, Force sensor"
+    },
+    "variants": null,
+    "colors": ["White"],
+    "ramOptions": null,
+    "storageOptions": null,
+    "inStock": true,
+    "stockCount": 89,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Jennifer M.",
+        "rating": 5,
+        "date": "2024-01-14",
+        "title": "Perfect for workouts",
+        "comment": "Great fit and the noise cancellation is amazing. Perfect for my daily runs.",
+        "verified": true
+      },
+      {
+        "id": "2",
+        "user": "Robert T.",
+        "rating": 4,
+        "date": "2024-01-11",
+        "title": "Seamless integration",
+        "comment": "Works perfectly with my iPhone and Mac. The spatial audio is incredible.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "name": "iPad Air",
+    "brand": "Apple",
+    "category": "Tablets",
+    "price": 599.99,
+    "originalPrice": 649.99,
+    "image": null,
+    "images": [
+      "https://example.com/ipadair_1.jpg",
+      "https://example.com/ipadair_2.jpg"
+    ],
+    "rating": 4.6,
+    "reviews_count": 789,
+    "description": "Powerful tablet for work and creativity. The iPad Air with M1 chip offers desktop-class performance in a portable tablet form factor.",
+    "specifications": {
+      "Display": "10.9-inch Liquid Retina display",
+      "Chip": "M1 chip",
+      "Storage": "64GB, 256GB",
+      "Battery": "Up to 10 hours",
+      "Connectivity": "Wi-Fi 6, Bluetooth 5.0",
+      "Features": "Touch ID, Apple Pencil support, Magic Keyboard support"
+    },
+    "variants": [
+      { "name": "64GB", "price": 599.99, "available": true },
+      { "name": "256GB", "price": 749.99, "available": true }
+    ],
+    "colors": ["Space Gray", "Silver", "Rose Gold", "Green", "Blue"],
+    "ramOptions": null,
+    "storageOptions": null,
+    "inStock": true,
+    "stockCount": 34,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Lisa P.",
+        "rating": 4,
+        "date": "2024-01-13",
+        "title": "Great for drawing",
+        "comment": "Perfect for digital art with the Apple Pencil. The M1 chip handles everything smoothly.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Samsung Galaxy Tab S9",
+    "brand": "Samsung",
+    "category": "Tablets",
+    "price": 699.99,
+    "originalPrice": 799.99,
+    "image": null,
+    "images": [
+      "https://example.com/galaxytabs9_1.jpg",
+      "https://example.com/galaxytabs9_2.jpg"
+    ],
+    "rating": 4.5,
+    "reviews_count": 456,
+    "description": "Premium Android tablet with S Pen. The Samsung Galaxy Tab S9 offers exceptional performance with the included S Pen for productivity and creativity.",
+    "specifications": {
+      "Display": "11-inch Dynamic AMOLED 2X display",
+      "Processor": "Snapdragon 8 Gen 2",
+      "Storage": "128GB, 256GB",
+      "Battery": "8400mAh",
+      "Connectivity": "Wi-Fi 6E, 5G (optional)",
+      "Features": "S Pen included, DeX mode, Multi-window"
+    },
+    "variants": [
+      { "name": "128GB", "price": 699.99, "available": true },
+      { "name": "256GB", "price": 799.99, "available": true }
+    ],
+    "colors": ["Graphite", "Beige"],
+    "ramOptions": ["8GB", "12GB"],
+    "storageOptions": null,
+    "inStock": true,
+    "stockCount": 28,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Mark S.",
+        "rating": 4,
+        "date": "2024-01-12",
+        "title": "Excellent Android tablet",
+        "comment": "The S Pen is fantastic for note-taking and drawing. Great performance overall.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Nintendo Switch OLED",
+    "brand": "Nintendo",
+    "category": "Gaming",
+    "price": 349.99,
+    "originalPrice": 349.99,
+    "image": null,
+    "images": [
+      "https://example.com/nintendoswitch_1.jpg",
+      "https://example.com/nintendoswitch_2.jpg"
+    ],
+    "rating": 4.7,
+    "reviews_count": 1892,
+    "description": "Hybrid gaming console with OLED screen. The Nintendo Switch OLED offers enhanced visuals with a vibrant 7-inch OLED display and improved audio.",
+    "specifications": {
+      "Display": "7-inch OLED screen",
+      "Storage": "64GB internal storage",
+      "Battery": "Up to 9 hours",
+      "Connectivity": "Wi-Fi, Bluetooth 4.1",
+      "Features": "Dock included, Joy-Con controllers, TV mode support"
+    },
+    "variants": null,
+    "colors": ["White", "Neon Blue/Neon Red"],
+    "ramOptions": null,
+    "storageOptions": null,
+    "inStock": true,
+    "stockCount": 56,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Tom B.",
+        "rating": 5,
+        "date": "2024-01-15",
+        "title": "Perfect for gaming",
+        "comment": "The OLED screen makes games look amazing. Great for both handheld and TV gaming.",
+        "verified": true
+      },
+      {
+        "id": "2",
+        "user": "Emma L.",
+        "rating": 4,
+        "date": "2024-01-10",
+        "title": "Great family console",
+        "comment": "Perfect for family game nights. The portability is a huge plus.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "name": "PlayStation 5",
+    "brand": "Sony",
+    "category": "Gaming",
+    "price": 499.99,
+    "originalPrice": 499.99,
+    "image": null,
+    "images": [
+      "https://example.com/ps5_1.jpg",
+      "https://example.com/ps5_2.jpg"
+    ],
+    "rating": 4.8,
+    "reviews_count": 2341,
+    "description": "Next-gen gaming console with lightning-fast loading and stunning graphics. The PlayStation 5 delivers immersive gaming experiences with ray tracing and 3D audio.",
+    "specifications": {
+      "Processor": "AMD Zen 2 CPU",
+      "Graphics": "AMD RDNA 2 GPU",
+      "Storage": "825GB SSD",
+      "Memory": "16GB GDDR6",
+      "Features": "Ray tracing, 3D audio, 4K gaming, 120fps support"
+    },
+    "variants": [
+      { "name": "Disc Edition", "price": 499.99, "available": false },
+      { "name": "Digital Edition", "price": 399.99, "available": false }
+    ],
+    "colors": ["White"],
+    "ramOptions": null,
+    "storageOptions": null,
+    "inStock": false,
+    "stockCount": 0,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Chris R.",
+        "rating": 5,
+        "date": "2024-01-14",
+        "title": "Incredible performance",
+        "comment": "The loading times are amazing and the graphics are stunning. Worth every penny.",
+        "verified": true
+      },
+      {
+        "id": "2",
+        "user": "Alex K.",
+        "rating": 4,
+        "date": "2024-01-08",
+        "title": "Great gaming experience",
+        "comment": "The DualSense controller is revolutionary. Haptic feedback adds so much immersion.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Canon EOS R6",
+    "brand": "Canon",
+    "category": "Cameras",
+    "price": 2499.99,
+    "originalPrice": 2799.99,
+    "image": null,
+    "images": [
+      "https://example.com/canoneosr6_1.jpg",
+      "https://example.com/canoneosr6_2.jpg"
+    ],
+    "rating": 4.9,
+    "reviews_count": 234,
+    "description": "Full-frame mirrorless camera with exceptional performance. The Canon EOS R6 offers professional-grade photography and videography capabilities in a compact form factor.",
+    "specifications": {
+      "Sensor": "20.1MP full-frame CMOS",
+      "Processor": "DIGIC X",
+      "ISO": "100-102,400 (expandable)",
+      "Video": "4K 60p, Full HD 120p",
+      "Autofocus": "Dual Pixel CMOS AF II",
+      "Connectivity": "Wi-Fi, Bluetooth, USB-C"
+    },
+    "variants": null,
+    "colors": ["Black"],
+    "ramOptions": null,
+    "storageOptions": null,
+    "inStock": true,
+    "stockCount": 12,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Sarah W.",
+        "rating": 5,
+        "date": "2024-01-15",
+        "title": "Professional quality",
+        "comment": "The image quality is outstanding. Perfect for both photography and videography.",
+        "verified": true
+      },
+      {
+        "id": "2",
+        "user": "Mike D.",
+        "rating": 5,
+        "date": "2024-01-12",
+        "title": "Excellent autofocus",
+        "comment": "The autofocus system is incredibly fast and accurate. Great for sports photography.",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "12",
+    "name": "GoPro Hero 11",
+    "brand": "GoPro",
+    "category": "Cameras",
+    "price": 399.99,
+    "originalPrice": 449.99,
+    "image": null,
+    "images": [
+      "https://example.com/goprohero11_1.jpg",
+      "https://example.com/goprohero11_2.jpg"
+    ],
+    "rating": 4.6,
+    "reviews_count": 567,
+    "description": "Action camera for adventures. The GoPro Hero 11 captures stunning 5.3K video and 27MP photos with advanced stabilization and waterproof design.",
+    "specifications": {
+      "Sensor": "27MP sensor",
+      "Video": "5.3K 60fps, 4K 120fps",
+      "Stabilization": "HyperSmooth 5.0",
+      "Waterproof": "33ft (10m)",
+      "Battery": "Up to 2 hours",
+      "Features": "TimeWarp 3.0, Night mode, Live streaming"
+    },
+    "variants": [
+      { "name": "Black", "price": 399.99, "available": true },
+      { "name": "Black + Max Lens Mod", "price": 499.99, "available": true }
+    ],
+    "colors": ["Black"],
+    "ramOptions": null,
+    "storageOptions": null,
+    "inStock": true,
+    "stockCount": 78,
+    "reviews": [
+      {
+        "id": "1",
+        "user": "Jake M.",
+        "rating": 4,
+        "date": "2024-01-14",
+        "title": "Perfect for adventures",
+        "comment": "Great for capturing outdoor activities. The stabilization is incredible.",
+        "verified": true
+      },
+      {
+        "id": "2",
+        "user": "Lisa T.",
+        "rating": 5,
+        "date": "2024-01-11",
+        "title": "Amazing video quality",
+        "comment": "The 5.3K video quality is stunning. Perfect for creating content.",
+        "verified": true
+      }
+    ]
+  }
+]
