@@ -47,15 +47,14 @@ class OrdersCubit extends Cubit<OrdersState> {
         ),
       ];
 
-      emit(state.copyWith(
-        orders: orders,
-        status: RequestState.loaded,
-      ));
+      emit(state.copyWith(orders: orders, status: RequestState.loaded));
     } catch (e) {
-      emit(state.copyWith(
-        status: RequestState.error,
-        errorMessage: 'Failed to load orders: $e',
-      ));
+      emit(
+        state.copyWith(
+          status: RequestState.error,
+          errorMessage: 'Failed to load orders: $e',
+        ),
+      );
     }
   }
 

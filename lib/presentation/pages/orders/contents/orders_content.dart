@@ -22,21 +22,24 @@ class OrdersContent extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline,
-                    size: 64, color: Colors.grey.shade400),
+                Icon(
+                  Icons.error_outline,
+                  size: 64,
+                  color: Colors.grey.shade400,
+                ),
                 const SizedBox(height: 16),
                 Text(
                   'Error loading orders',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Colors.grey.shade600,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(color: Colors.grey.shade600),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   state.errorMessage ?? 'Something went wrong',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey.shade500,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade500),
                 ),
               ],
             ),
@@ -91,9 +94,9 @@ class OrdersContent extends StatelessWidget {
                 Text(
                   'My Orders',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -114,9 +117,9 @@ class OrdersContent extends StatelessWidget {
                     Text(
                       '$orderCount order${orderCount != 1 ? 's' : ''}',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: kSecondaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        color: kSecondaryColor,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ],
                 ),
@@ -133,9 +136,9 @@ class OrdersContent extends StatelessWidget {
               child: Text(
                 '$orderCount items',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
         ],
@@ -167,9 +170,9 @@ class OrdersContent extends StatelessWidget {
             Text(
               'No orders yet',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.grey.shade600,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.grey.shade600,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 12),
             Text(
@@ -215,9 +218,9 @@ class OrdersContent extends StatelessWidget {
             Text(
               'Order History',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: kTextPrimaryColor,
-                  ),
+                fontWeight: FontWeight.bold,
+                color: kTextPrimaryColor,
+              ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -228,9 +231,9 @@ class OrdersContent extends StatelessWidget {
               child: Text(
                 '${state.orders.length} orders',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: kSecondaryColor,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  color: kSecondaryColor,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],

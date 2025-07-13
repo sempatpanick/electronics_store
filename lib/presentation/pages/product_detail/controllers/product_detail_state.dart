@@ -39,16 +39,32 @@ class ProductDetailState {
     int? quantity,
     bool? isFavorite,
     bool? isAddedToCart,
+    bool? clearErrorMessage,
+    bool? clearProduct,
+    bool? clearSelectedVariant,
+    bool? clearSelectedColor,
+    bool? clearSelectedRam,
+    bool? clearSelectedStorage,
   }) {
     return ProductDetailState(
       status: status ?? this.status,
-      errorMessage: errorMessage ?? this.errorMessage,
+      errorMessage: (clearErrorMessage ?? false)
+          ? null
+          : errorMessage ?? this.errorMessage,
       productId: productId ?? this.productId,
-      product: product ?? this.product,
-      selectedVariant: selectedVariant ?? this.selectedVariant,
-      selectedColor: selectedColor ?? this.selectedColor,
-      selectedRam: selectedRam ?? this.selectedRam,
-      selectedStorage: selectedStorage ?? this.selectedStorage,
+      product: (clearProduct ?? false) ? null : product ?? this.product,
+      selectedVariant: (clearSelectedVariant ?? false)
+          ? null
+          : selectedVariant ?? this.selectedVariant,
+      selectedColor: (clearSelectedColor ?? false)
+          ? null
+          : selectedColor ?? this.selectedColor,
+      selectedRam: (clearSelectedRam ?? false)
+          ? null
+          : selectedRam ?? this.selectedRam,
+      selectedStorage: (clearSelectedStorage ?? false)
+          ? null
+          : selectedStorage ?? this.selectedStorage,
       quantity: quantity ?? this.quantity,
       isFavorite: isFavorite ?? this.isFavorite,
       isAddedToCart: isAddedToCart ?? this.isAddedToCart,

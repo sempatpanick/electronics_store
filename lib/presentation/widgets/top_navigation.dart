@@ -55,9 +55,9 @@ class TopNavigation extends StatelessWidget {
         Text(
           'Electronics Store',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: kPrimaryColor,
-                fontWeight: FontWeight.bold,
-              ),
+            color: kPrimaryColor,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );
@@ -84,9 +84,9 @@ class TopNavigation extends StatelessWidget {
             child: InkWell(
               borderRadius: BorderRadius.circular(8),
               onTap: () => context.read<MainCubit>().navigateToRoute(
-                    item['index'] as int,
-                    context,
-                  ),
+                item['index'] as int,
+                context,
+              ),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -112,13 +112,11 @@ class TopNavigation extends StatelessWidget {
                     Text(
                       item['label'] as String,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: isSelected
-                                ? kPrimaryColor
-                                : kTextPrimaryColor,
-                            fontWeight: isSelected
-                                ? FontWeight.w600
-                                : FontWeight.normal,
-                          ),
+                        color: isSelected ? kPrimaryColor : kTextPrimaryColor,
+                        fontWeight: isSelected
+                            ? FontWeight.w600
+                            : FontWeight.normal,
+                      ),
                     ),
                   ],
                 ),

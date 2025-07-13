@@ -5,9 +5,9 @@ import '../../../../common/colors.dart';
 import '../../../../common/enums.dart';
 import '../../../../common/navigation_service.dart';
 import '../controllers/product_detail_cubit.dart';
+import '../widgets/product_description.dart';
 import '../widgets/product_image_gallery.dart';
 import '../widgets/product_options.dart';
-import '../widgets/product_description.dart';
 import '../widgets/product_reviews.dart';
 
 class ProductDetailContent extends StatelessWidget {
@@ -17,11 +17,11 @@ class ProductDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ProductDetailCubit, ProductDetailState>(
       listenWhen: (previous, current) =>
-          current.errorMessage != null ||
-          current.isAddedToCart ||
-          (previous.product != current.product && current.product != null),
+          previous.errorMessage != current.errorMessage ||
+          previous.isAddedToCart != current.isAddedToCart,
       listener: (context, state) {
-        if (state.errorMessage != null) {
+        // Handle error messages
+        if ((state.errorMessage ?? "").isNotEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errorMessage!),
@@ -30,54 +30,71 @@ class ProductDetailContent extends StatelessWidget {
           );
           context.read<ProductDetailCubit>().clearError();
         }
-
+        // Handle success messages
         if (state.isAddedToCart) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Product added to cart successfully!'),
+            SnackBar(
+              content: const Text('Product added to cart successfully!'),
               backgroundColor: kSecondaryColor,
             ),
           );
-          // Reset the added to cart state
           context.read<ProductDetailCubit>().resetAddedToCart();
         }
       },
+      buildWhen: (previous, current) =>
+          previous.status != current.status ||
+          previous.productId != current.productId ||
+          previous.product != current.product ||
+          previous.selectedVariant != current.selectedVariant ||
+          previous.selectedColor != current.selectedColor ||
+          previous.selectedRam != current.selectedRam ||
+          previous.selectedStorage != current.selectedStorage ||
+          previous.quantity != current.quantity ||
+          previous.isFavorite != current.isFavorite,
       builder: (context, state) {
-        if (state.status == RequestState.loading) {
+        if (state.status == RequestState.loading ||
+            state.status == RequestState.none) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (state.status == RequestState.error) {
+        if (state.status == RequestState.error && state.product == null) {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 64,
-                  color: Colors.grey.shade400,
-                ),
+                Icon(Icons.search_off, size: 64, color: Colors.grey.shade400),
                 const SizedBox(height: 16),
                 Text(
-                  'Error loading product',
+                  'Product not found',
                   style: Theme.of(
                     context,
                   ).textTheme.titleLarge?.copyWith(color: Colors.grey.shade600),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  state.errorMessage ?? 'Something went wrong',
+                  'The product you are looking for does not exist.',
                   style: Theme.of(
                     context,
                   ).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade500),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton.icon(
+                  onPressed: () => NavigationService.goToProducts(context),
+                  icon: const Icon(Icons.shopping_bag),
+                  label: const Text('Browse Products'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kPrimaryColor,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                  ),
                 ),
               ],
             ),
           );
-        }
-
-        if (state.product == null) {
-          return const Center(child: Text('Product not found'));
         }
 
         final screenWidth = MediaQuery.of(context).size.width;

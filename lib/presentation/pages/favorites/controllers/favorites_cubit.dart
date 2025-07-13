@@ -22,16 +22,16 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     try {
       final favoritesResult = await _favoritesUseCase.getFavorites();
       favoritesResult.fold(
-        (error) => emit(state.copyWith(
-          status: RequestState.error,
-          errorMessage: error,
-        )),
+        (error) => emit(
+          state.copyWith(status: RequestState.error, errorMessage: error),
+        ),
         (favorites) async {
           // Get product details for each favorite
           final favoriteProducts = <ProductEntity>[];
           for (final favorite in favorites) {
-            final productResult =
-                await _productUseCase.getProductById(favorite.productId);
+            final productResult = await _productUseCase.getProductById(
+              favorite.productId,
+            );
             productResult.fold(
               (error) =>
                   print('Error loading product ${favorite.productId}: $error'),
@@ -43,46 +43,51 @@ class FavoritesCubit extends Cubit<FavoritesState> {
             );
           }
 
-          emit(state.copyWith(
-            favoriteProducts: favoriteProducts,
-            status: RequestState.loaded,
-          ));
+          emit(
+            state.copyWith(
+              favoriteProducts: favoriteProducts,
+              status: RequestState.loaded,
+            ),
+          );
         },
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: RequestState.error,
-        errorMessage: 'Failed to load favorites: $e',
-      ));
+      emit(
+        state.copyWith(
+          status: RequestState.error,
+          errorMessage: 'Failed to load favorites: $e',
+        ),
+      );
     }
   }
 
   Future<void> toggleFavorite(String productId) async {
     // Get product data from ProductUseCase
     final productResult = await _productUseCase.getProductById(productId);
-    productResult.fold(
-      (error) => print('Error getting product: $error'),
-      (product) async {
-        if (product != null) {
-          final result = await _favoritesUseCase.toggleFavorite(product);
-          result.fold((error) => print('Error toggling favorite: $error'),
-              (isFavorite) {
-            final favoriteProducts =
-                List<ProductEntity>.from(state.favoriteProducts);
-            if (isFavorite) {
-              // Add to favorites if not already there
-              if (!favoriteProducts.any((p) => p.id == productId)) {
-                favoriteProducts.add(product);
-              }
-            } else {
-              // Remove from favorites
-              favoriteProducts.removeWhere((p) => p.id == productId);
+    productResult.fold((error) => print('Error getting product: $error'), (
+      product,
+    ) async {
+      if (product != null) {
+        final result = await _favoritesUseCase.toggleFavorite(product);
+        result.fold((error) => print('Error toggling favorite: $error'), (
+          isFavorite,
+        ) {
+          final favoriteProducts = List<ProductEntity>.from(
+            state.favoriteProducts,
+          );
+          if (isFavorite) {
+            // Add to favorites if not already there
+            if (!favoriteProducts.any((p) => p.id == productId)) {
+              favoriteProducts.add(product);
             }
-            emit(state.copyWith(favoriteProducts: favoriteProducts));
-          });
-        }
-      },
-    );
+          } else {
+            // Remove from favorites
+            favoriteProducts.removeWhere((p) => p.id == productId);
+          }
+          emit(state.copyWith(favoriteProducts: favoriteProducts));
+        });
+      }
+    });
   }
 
   @override

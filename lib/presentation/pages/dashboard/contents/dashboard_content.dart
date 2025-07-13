@@ -13,17 +13,17 @@ class DashboardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardCubit, DashboardState>(
-          builder: (context, state) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildSearchAndFilters(context, state),
-                const SizedBox(height: 10),
-                _buildProductsWrap(context, state),
-              ],
-            );
-          },
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSearchAndFilters(context, state),
+            const SizedBox(height: 10),
+            _buildProductsWrap(context, state),
+          ],
         );
+      },
+    );
   }
 
   Widget _buildSearchAndFilters(BuildContext context, DashboardState state) {
@@ -63,20 +63,22 @@ class DashboardContent extends StatelessWidget {
                       onSelected: (selected) {
                         if (selected) {
                           context.read<DashboardCubit>().selectCategory(
-                                category,
-                              );
+                            category,
+                          );
                         }
                       },
                       backgroundColor: Colors.grey.shade100,
                       selectedColor: kPrimaryColor.withValues(alpha: .2),
                       labelStyle: TextStyle(
                         color: isSelected ? kPrimaryColor : kTextPrimaryColor,
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.normal,
+                        fontWeight: isSelected
+                            ? FontWeight.w600
+                            : FontWeight.normal,
                       ),
                       side: BorderSide(
-                        color:
-                            isSelected ? kPrimaryColor : Colors.grey.shade300,
+                        color: isSelected
+                            ? kPrimaryColor
+                            : Colors.grey.shade300,
                       ),
                     ),
                   );
@@ -124,13 +126,13 @@ class DashboardContent extends StatelessWidget {
     final spacing = isVerySmallScreen
         ? 0
         : isSmallScreen
-            ? 2
-            : 16;
+        ? 2
+        : 16;
     final runSpacing = isVerySmallScreen
         ? 0
         : isSmallScreen
-            ? 2
-            : 16;
+        ? 2
+        : 16;
 
     // Calculate how many products can fit in one row
     const productWidth = 180.0;

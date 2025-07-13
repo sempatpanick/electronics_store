@@ -70,7 +70,9 @@ class LocalDataSourceImpl implements LocalDataSource {
   @override
   Future<bool> isFavorite(String productId) async {
     try {
-      for (final favorite in DatabaseHelper.favoriteBox.values) {
+      final favorites = DatabaseHelper.favoriteBox.values.toList();
+
+      for (final favorite in favorites) {
         if (favorite.productId == productId) {
           return true;
         }

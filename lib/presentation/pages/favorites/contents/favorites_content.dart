@@ -23,21 +23,24 @@ class FavoritesContent extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline,
-                    size: 64, color: Colors.grey.shade400),
+                Icon(
+                  Icons.error_outline,
+                  size: 64,
+                  color: Colors.grey.shade400,
+                ),
                 const SizedBox(height: 16),
                 Text(
                   'Error loading favorites',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Colors.grey.shade600,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(color: Colors.grey.shade600),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   state.errorMessage ?? 'Something went wrong',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey.shade500,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade500),
                 ),
               ],
             ),
@@ -92,9 +95,9 @@ class FavoritesContent extends StatelessWidget {
                 Text(
                   'My Favorites',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -115,9 +118,9 @@ class FavoritesContent extends StatelessWidget {
                     Text(
                       '$favoriteCount favorite${favoriteCount != 1 ? 's' : ''}',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: kSecondaryColor,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        color: kSecondaryColor,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ],
                 ),
@@ -134,9 +137,9 @@ class FavoritesContent extends StatelessWidget {
               child: Text(
                 '$favoriteCount items',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
         ],
@@ -168,9 +171,9 @@ class FavoritesContent extends StatelessWidget {
             Text(
               'No favorites yet',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.grey.shade600,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.grey.shade600,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 12),
             Text(
@@ -210,25 +213,25 @@ class FavoritesContent extends StatelessWidget {
     final spacing = isVerySmallScreen
         ? 8.0
         : isSmallScreen
-            ? 12.0
-            : 16.0;
+        ? 12.0
+        : 16.0;
     final runSpacing = isVerySmallScreen
         ? 8.0
         : isSmallScreen
-            ? 12.0
-            : 16.0;
+        ? 12.0
+        : 16.0;
 
     // Calculate responsive product width
     final productWidth = isVerySmallScreen
         ? 160.0
         : isSmallScreen
-            ? 170.0
-            : 180.0;
+        ? 170.0
+        : 180.0;
     final productHeight = isVerySmallScreen
         ? 220.0
         : isSmallScreen
-            ? 230.0
-            : 240.0;
+        ? 230.0
+        : 240.0;
 
     // Calculate how many products can fit in one row
     final availableWidth = screenWidth - 48.0; // Account for padding
@@ -248,9 +251,9 @@ class FavoritesContent extends StatelessWidget {
             Text(
               'Favorite Products',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: kTextPrimaryColor,
-                  ),
+                fontWeight: FontWeight.bold,
+                color: kTextPrimaryColor,
+              ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -261,9 +264,9 @@ class FavoritesContent extends StatelessWidget {
               child: Text(
                 '${state.favoriteProducts.length} items',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: kSecondaryColor,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  color: kSecondaryColor,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],
@@ -283,9 +286,9 @@ class FavoritesContent extends StatelessWidget {
                   product: product,
                   isFavorite: true,
                   onFavoriteToggle: () async {
-                    await context
-                        .read<FavoritesCubit>()
-                        .toggleFavorite(product.id);
+                    await context.read<FavoritesCubit>().toggleFavorite(
+                      product.id,
+                    );
                   },
                 ),
               );
@@ -302,18 +305,28 @@ class FavoritesContent extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.grey.shade200),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.info_outline, color: kSecondaryColor, size: 20),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Click the heart icon on any product to remove it from favorites',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(color: kTextSecondaryColor),
-                  ),
-                ],
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: Icon(
+                        Icons.info_outline,
+                        color: kSecondaryColor,
+                        size: 20,
+                      ),
+                    ),
+                    WidgetSpan(child: SizedBox(width: 8)),
+                    TextSpan(
+                      text:
+                          'Click the heart icon on any product to remove it from favorites',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: kTextSecondaryColor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

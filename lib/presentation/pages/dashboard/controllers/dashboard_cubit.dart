@@ -37,30 +37,30 @@ class DashboardCubit extends Cubit<DashboardState> {
 
       productsResult.fold(
         (error) {
-          emit(state.copyWith(
-            status: RequestState.error,
-            errorMessage: error,
-          ));
+          emit(state.copyWith(status: RequestState.error, errorMessage: error));
         },
         (products) {
           categoriesResult.fold(
-            (error) => emit(state.copyWith(
-              status: RequestState.error,
-              errorMessage: error,
-            )),
-            (categories) => emit(state.copyWith(
-              products: products,
-              categories: categories,
-              status: RequestState.loaded,
-            )),
+            (error) => emit(
+              state.copyWith(status: RequestState.error, errorMessage: error),
+            ),
+            (categories) => emit(
+              state.copyWith(
+                products: products,
+                categories: categories,
+                status: RequestState.loaded,
+              ),
+            ),
           );
         },
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: RequestState.error,
-        errorMessage: 'Failed to load products: $e',
-      ));
+      emit(
+        state.copyWith(
+          status: RequestState.error,
+          errorMessage: 'Failed to load products: $e',
+        ),
+      );
     }
   }
 
@@ -75,26 +75,26 @@ class DashboardCubit extends Cubit<DashboardState> {
   Future<void> toggleFavorite(String productId) async {
     // Get product data from ProductUseCase
     final productResult = await _productUseCase.getProductById(productId);
-    productResult.fold(
-      (error) => print('Error getting product: $error'),
-      (product) async {
-        if (product != null) {
-          final result = await _favoritesUseCase.toggleFavorite(product);
-          result.fold((error) => print('Error toggling favorite: $error'),
-              (isFavorite) {
-            final favorites = List<String>.from(state.favorites);
-            if (isFavorite) {
-              if (!favorites.contains(productId)) {
-                favorites.add(productId);
-              }
-            } else {
-              favorites.remove(productId);
+    productResult.fold((error) => print('Error getting product: $error'), (
+      product,
+    ) async {
+      if (product != null) {
+        final result = await _favoritesUseCase.toggleFavorite(product);
+        result.fold((error) => print('Error toggling favorite: $error'), (
+          isFavorite,
+        ) {
+          final favorites = List<String>.from(state.favorites);
+          if (isFavorite) {
+            if (!favorites.contains(productId)) {
+              favorites.add(productId);
             }
-            emit(state.copyWith(favorites: favorites));
-          });
-        }
-      },
-    );
+          } else {
+            favorites.remove(productId);
+          }
+          emit(state.copyWith(favorites: favorites));
+        });
+      }
+    });
   }
 
   void syncFavorites(List<String> favorites) {
@@ -103,8 +103,9 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   Future<void> _loadFavorites() async {
     final result = await _favoritesUseCase.getFavorites();
-    result.fold((error) => print('Error loading favorites: $error'),
-        (favorites) {
+    result.fold((error) => print('Error loading favorites: $error'), (
+      favorites,
+    ) {
       final favoriteIds = favorites.map((f) => f.productId).toList();
       emit(state.copyWith(favorites: favoriteIds));
     });
@@ -120,20 +121,23 @@ class DashboardCubit extends Cubit<DashboardState> {
       );
 
       result.fold(
-        (error) => emit(state.copyWith(
-          status: RequestState.error,
-          errorMessage: error,
-        )),
-        (filteredProducts) => emit(state.copyWith(
-          products: filteredProducts,
-          status: RequestState.loaded,
-        )),
+        (error) => emit(
+          state.copyWith(status: RequestState.error, errorMessage: error),
+        ),
+        (filteredProducts) => emit(
+          state.copyWith(
+            products: filteredProducts,
+            status: RequestState.loaded,
+          ),
+        ),
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: RequestState.error,
-        errorMessage: 'Failed to filter products: $e',
-      ));
+      emit(
+        state.copyWith(
+          status: RequestState.error,
+          errorMessage: 'Failed to filter products: $e',
+        ),
+      );
     }
   }
 

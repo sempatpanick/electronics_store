@@ -21,23 +21,23 @@ class CartCubit extends Cubit<CartState> {
     try {
       final result = await _cartUseCase.getCartItems();
       result.fold(
-        (error) => emit(state.copyWith(
-          status: RequestState.error,
-          errorMessage: error,
-        )),
+        (error) => emit(
+          state.copyWith(status: RequestState.error, errorMessage: error),
+        ),
         (cartItems) {
-          emit(state.copyWith(
-            cartItems: cartItems,
-            status: RequestState.loaded,
-          ));
+          emit(
+            state.copyWith(cartItems: cartItems, status: RequestState.loaded),
+          );
           _calculateTotals();
         },
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: RequestState.error,
-        errorMessage: 'Failed to load cart items: $e',
-      ));
+      emit(
+        state.copyWith(
+          status: RequestState.error,
+          errorMessage: 'Failed to load cart items: $e',
+        ),
+      );
     }
   }
 
@@ -62,20 +62,21 @@ class CartCubit extends Cubit<CartState> {
       );
 
       result.fold(
-        (error) => emit(state.copyWith(
-          status: RequestState.error,
-          errorMessage: error,
-        )),
+        (error) => emit(
+          state.copyWith(status: RequestState.error, errorMessage: error),
+        ),
         (cartEntity) async {
           // Reload cart items to get updated list
           await _loadCartItems();
         },
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: RequestState.error,
-        errorMessage: 'Failed to add to cart: $e',
-      ));
+      emit(
+        state.copyWith(
+          status: RequestState.error,
+          errorMessage: 'Failed to add to cart: $e',
+        ),
+      );
     }
   }
 
@@ -85,20 +86,21 @@ class CartCubit extends Cubit<CartState> {
     try {
       final result = await _cartUseCase.removeFromCart(productId);
       result.fold(
-        (error) => emit(state.copyWith(
-          status: RequestState.error,
-          errorMessage: error,
-        )),
+        (error) => emit(
+          state.copyWith(status: RequestState.error, errorMessage: error),
+        ),
         (_) async {
           // Reload cart items to get updated list
           await _loadCartItems();
         },
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: RequestState.error,
-        errorMessage: 'Failed to remove from cart: $e',
-      ));
+      emit(
+        state.copyWith(
+          status: RequestState.error,
+          errorMessage: 'Failed to remove from cart: $e',
+        ),
+      );
     }
   }
 
@@ -111,23 +113,26 @@ class CartCubit extends Cubit<CartState> {
     emit(state.copyWith(status: RequestState.loading));
 
     try {
-      final result =
-          await _cartUseCase.updateCartItemQuantity(productId, quantity);
+      final result = await _cartUseCase.updateCartItemQuantity(
+        productId,
+        quantity,
+      );
       result.fold(
-        (error) => emit(state.copyWith(
-          status: RequestState.error,
-          errorMessage: error,
-        )),
+        (error) => emit(
+          state.copyWith(status: RequestState.error, errorMessage: error),
+        ),
         (cartEntity) async {
           // Reload cart items to get updated list
           await _loadCartItems();
         },
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: RequestState.error,
-        errorMessage: 'Failed to update quantity: $e',
-      ));
+      emit(
+        state.copyWith(
+          status: RequestState.error,
+          errorMessage: 'Failed to update quantity: $e',
+        ),
+      );
     }
   }
 
@@ -137,23 +142,21 @@ class CartCubit extends Cubit<CartState> {
     try {
       final result = await _cartUseCase.clearCart();
       result.fold(
-        (error) => emit(state.copyWith(
-          status: RequestState.error,
-          errorMessage: error,
-        )),
+        (error) => emit(
+          state.copyWith(status: RequestState.error, errorMessage: error),
+        ),
         (_) {
-          emit(state.copyWith(
-            cartItems: [],
-            status: RequestState.loaded,
-          ));
+          emit(state.copyWith(cartItems: [], status: RequestState.loaded));
           _calculateTotals();
         },
       );
     } catch (e) {
-      emit(state.copyWith(
-        status: RequestState.error,
-        errorMessage: 'Failed to clear cart: $e',
-      ));
+      emit(
+        state.copyWith(
+          status: RequestState.error,
+          errorMessage: 'Failed to clear cart: $e',
+        ),
+      );
     }
   }
 

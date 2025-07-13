@@ -16,13 +16,16 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  String? _initializedProductId;
+
   @override
   void initState() {
     super.initState();
     // Initialize with current product ID
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final productId = GoRouterState.of(context).pathParameters['id'];
-      if (productId != null) {
+      if (productId != null && productId != _initializedProductId) {
+        _initializedProductId = productId;
         context.read<ProductDetailCubit>().initialize(productId);
       }
     });
