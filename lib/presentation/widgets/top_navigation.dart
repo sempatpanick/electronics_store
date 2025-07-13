@@ -5,8 +5,145 @@ import '../../common/colors.dart';
 import '../../common/navigation_service.dart';
 import '../pages/main/controllers/main_cubit.dart';
 
-class TopNavigation extends StatelessWidget {
+class TopNavigation extends StatefulWidget {
   const TopNavigation({super.key});
+
+  @override
+  State<TopNavigation> createState() => _TopNavigationState();
+}
+
+class _TopNavigationState extends State<TopNavigation> {
+  OverlayEntry? _overlayEntry;
+  final GlobalKey _profileKey = GlobalKey();
+
+  @override
+  void dispose() {
+    _removeOverlay();
+    super.dispose();
+  }
+
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
+  void _showUserMenu() {
+    if (_overlayEntry != null) {
+      _removeOverlay();
+      return;
+    }
+
+    _overlayEntry = OverlayEntry(builder: (context) => _buildOverlayMenu());
+
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  Widget _buildOverlayMenu() {
+    final renderBox =
+        _profileKey.currentContext?.findRenderObject() as RenderBox?;
+    final buttonPosition = renderBox?.localToGlobal(Offset.zero);
+    final buttonSize = renderBox?.size;
+
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    const popupWidth = 200.0;
+
+    double dx = buttonPosition?.dx ?? 0;
+    double dy = (buttonPosition?.dy ?? 0) + (buttonSize?.height ?? 0);
+
+    if (dx + popupWidth > screenWidth) {
+      dx = screenWidth - popupWidth - 8;
+    }
+    if (dx < 0) dx = 8;
+
+    return Positioned(
+      width: popupWidth,
+      left: dx,
+      top: dy,
+      child: Material(
+        elevation: 8,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey.shade200),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildMenuItem(
+                icon: Icons.person_outline,
+                label: 'Profile',
+                onTap: () {
+                  _removeOverlay();
+                  // Handle profile action
+                },
+              ),
+              _buildMenuItem(
+                icon: Icons.settings_outlined,
+                label: 'Settings',
+                onTap: () {
+                  _removeOverlay();
+                  // Handle settings action
+                },
+              ),
+              const Divider(height: 1),
+              _buildMenuItem(
+                icon: Icons.logout,
+                label: 'Logout',
+                onTap: () {
+                  _removeOverlay();
+                  // Handle logout action
+                },
+                textColor: kErrorColor,
+                iconColor: kErrorColor,
+              ),
+              _buildMenuItem(
+                icon: Icons.login,
+                label: 'Login',
+                onTap: () {
+                  _removeOverlay();
+                  NavigationService.goToLogin(context);
+                },
+                textColor: kPrimaryColor,
+                iconColor: kPrimaryColor,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuItem({
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+    Color? textColor,
+    Color? iconColor,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          children: [
+            Icon(icon, size: 20, color: iconColor ?? kTextSecondaryColor),
+            const SizedBox(width: 12),
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: textColor ?? kTextPrimaryColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +208,6 @@ class TopNavigation extends StatelessWidget {
       {'icon': Icons.favorite_outline, 'label': 'Favorites', 'index': 2},
       {'icon': Icons.shopping_cart_outlined, 'label': 'Cart', 'index': 3},
       {'icon': Icons.history, 'label': 'Orders', 'index': 4},
-      {'icon': Icons.more_horiz, 'label': 'More', 'index': 5},
     ];
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -139,61 +275,14 @@ class TopNavigation extends StatelessWidget {
         ),
         IconButton(icon: const Icon(Icons.support_agent), onPressed: () {}),
         Container(
+          key: _profileKey,
           margin: const EdgeInsets.only(left: 8),
-          child: PopupMenuButton<String>(
+          child: InkWell(
+            onTap: _showUserMenu,
             child: CircleAvatar(
               backgroundColor: kPrimaryColor,
               child: const Icon(Icons.person, color: Colors.white),
             ),
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'profile',
-                child: Row(
-                  children: [
-                    Icon(Icons.person_outline),
-                    SizedBox(width: 8),
-                    Text('Profile'),
-                  ],
-                ),
-              ),
-              const PopupMenuItem(
-                value: 'settings',
-                child: Row(
-                  children: [
-                    Icon(Icons.settings_outlined),
-                    SizedBox(width: 8),
-                    Text('Settings'),
-                  ],
-                ),
-              ),
-              const PopupMenuItem(
-                value: 'logout',
-                child: Row(
-                  children: [
-                    Icon(Icons.logout, color: kErrorColor),
-                    SizedBox(width: 8),
-                    Text('Logout', style: TextStyle(color: kErrorColor)),
-                  ],
-                ),
-              ),
-              const PopupMenuItem(
-                value: 'login',
-                child: Row(
-                  children: [
-                    Icon(Icons.login, color: kPrimaryColor),
-                    SizedBox(width: 8),
-                    Text('Login', style: TextStyle(color: kPrimaryColor)),
-                  ],
-                ),
-              ),
-            ],
-            onSelected: (value) {
-              switch (value) {
-                case 'login':
-                  NavigationService.goToLogin(context);
-                  break;
-              }
-            },
           ),
         ),
       ],
