@@ -16,14 +16,17 @@ abstract class AppRepository {
   Future<Either<String, CartEntity>> addToCart(CartEntity cartItem);
   Future<Either<String, CartEntity>> updateCartItem(CartEntity cartItem);
   Future<Either<String, void>> removeFromCart(String productId);
+  Future<Either<String, void>> removeCartItemById(String cartItemId);
   Future<Either<String, void>> clearCart();
   Future<Either<String, CartEntity?>> getCartItemByProductId(String productId);
+  Future<Either<String, CartEntity?>> getCartItemById(String cartItemId);
 
   // Products
   Future<Either<String, List<ProductEntity>>> getProducts();
   Future<Either<String, ProductEntity?>> getProductById(String productId);
   Future<Either<String, List<ProductEntity>>> getProductsByCategory(
-      String category);
+    String category,
+  );
   Future<Either<String, List<ProductEntity>>> searchProducts(String query);
   Future<Either<String, List<String>>> getCategories();
 }

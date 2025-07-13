@@ -108,6 +108,16 @@ class AppRepositoryImpl implements AppRepository {
   }
 
   @override
+  Future<Either<String, void>> removeCartItemById(String cartItemId) async {
+    try {
+      await _localDataSource.removeCartItemById(cartItemId);
+      return const Right(null);
+    } catch (e) {
+      return Left('Failed to remove cart item: $e');
+    }
+  }
+
+  @override
   Future<Either<String, void>> clearCart() async {
     try {
       await _localDataSource.clearCart();
@@ -129,6 +139,16 @@ class AppRepositoryImpl implements AppRepository {
     }
   }
 
+  @override
+  Future<Either<String, CartEntity?>> getCartItemById(String cartItemId) async {
+    try {
+      final result = await _localDataSource.getCartItemById(cartItemId);
+      return Right(result);
+    } catch (e) {
+      return Left('Failed to get cart item: $e');
+    }
+  }
+
   // Products Implementation
   @override
   Future<Either<String, List<ProductEntity>>> getProducts() async {
@@ -143,7 +163,8 @@ class AppRepositoryImpl implements AppRepository {
 
   @override
   Future<Either<String, ProductEntity?>> getProductById(
-      String productId) async {
+    String productId,
+  ) async {
     try {
       final productModel = await _assetsDataSource.getProductById(productId);
       final product = productModel?.toEntity();
@@ -155,10 +176,12 @@ class AppRepositoryImpl implements AppRepository {
 
   @override
   Future<Either<String, List<ProductEntity>>> getProductsByCategory(
-      String category) async {
+    String category,
+  ) async {
     try {
-      final productModels =
-          await _assetsDataSource.getProductsByCategory(category);
+      final productModels = await _assetsDataSource.getProductsByCategory(
+        category,
+      );
       final products = productModels.map((model) => model.toEntity()).toList();
       return Right(products);
     } catch (e) {
@@ -168,7 +191,8 @@ class AppRepositoryImpl implements AppRepository {
 
   @override
   Future<Either<String, List<ProductEntity>>> searchProducts(
-      String query) async {
+    String query,
+  ) async {
     try {
       final productModels = await _assetsDataSource.searchProducts(query);
       final products = productModels.map((model) => model.toEntity()).toList();

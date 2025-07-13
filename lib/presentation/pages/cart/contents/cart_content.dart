@@ -228,12 +228,12 @@ class CartContent extends StatelessWidget {
                 cartItem: cartItem,
                 onQuantityChanged: (quantity) {
                   context.read<CartCubit>().updateQuantity(
-                    cartItem.productId,
+                    cartItem.id,
                     quantity,
                   );
                 },
                 onRemove: () {
-                  context.read<CartCubit>().removeFromCart(cartItem.productId);
+                  context.read<CartCubit>().removeFromCart(cartItem.id);
                 },
               ),
             );

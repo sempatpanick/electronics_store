@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:hive_ce/hive.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
@@ -50,7 +50,7 @@ class DatabaseHelper {
       }
 
       // Initialize Hive
-      Hive.init(hiveDir.path);
+      Hive.initFlutter(hiveDir.path);
 
       // Register adapters;
       Hive.registerAdapter(CartModelAdapter());
@@ -75,6 +75,13 @@ class DatabaseHelper {
         final hiveDir = Directory(path.join(appSupportDir.path, 'hive'));
 
         print('Hive fallback directory path: ${hiveDir.path}');
+
+        // Initialize Hive
+        Hive.initFlutter(hiveDir.path);
+
+        // Register adapters;
+        Hive.registerAdapter(CartModelAdapter());
+        Hive.registerAdapter(FavoriteModelAdapter());
 
         if (!await hiveDir.exists()) {
           print('Creating Hive directory...');
@@ -102,16 +109,12 @@ class DatabaseHelper {
 
           print('Hive temp directory path: ${hiveDir.path}');
 
-          // if (!await hiveDir.exists()) {
-          //   print('Creating Hive directory...');
-          //   await hiveDir.create(recursive: true);
-          // }
-          //
-          // print('Checking directory permissions...');
-          // final canWrite = await _checkDirectoryPermissions(hiveDir);
-          // if (!canWrite) {
-          //   throw Exception('Cannot write to temporary directory');
-          // }
+          // Initialize Hive
+          Hive.initFlutter(hiveDir.path);
+
+          // Register adapters;
+          Hive.registerAdapter(CartModelAdapter());
+          Hive.registerAdapter(FavoriteModelAdapter());
 
           // Open boxes
           _cartBox = await Hive.openBox<CartModel>('cart');

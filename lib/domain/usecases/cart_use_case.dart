@@ -13,6 +13,59 @@ class CartUseCase {
     return _repository.getCartItems();
   }
 
+  // Generate a unique key for cart item based on product ID and selected options
+  String _generateCartItemKey(
+    String productId, {
+    String? selectedVariant,
+    String? selectedColor,
+    String? selectedRam,
+    String? selectedStorage,
+  }) {
+    final options = [
+      selectedVariant ?? '',
+      selectedColor ?? '',
+      selectedRam ?? '',
+      selectedStorage ?? '',
+    ];
+    return '$productId:${options.join('|')}';
+  }
+
+  // Find existing cart item with the same configuration
+  Future<Either<String, CartEntity?>> _findExistingCartItem(
+    String productId, {
+    String? selectedVariant,
+    String? selectedColor,
+    String? selectedRam,
+    String? selectedStorage,
+  }) async {
+    final cartItems = await _repository.getCartItems();
+
+    return cartItems.fold((error) => Left(error), (items) {
+      final targetKey = _generateCartItemKey(
+        productId,
+        selectedVariant: selectedVariant,
+        selectedColor: selectedColor,
+        selectedRam: selectedRam,
+        selectedStorage: selectedStorage,
+      );
+
+      for (final item in items) {
+        final itemKey = _generateCartItemKey(
+          item.productId,
+          selectedVariant: item.selectedVariant,
+          selectedColor: item.selectedColor,
+          selectedRam: item.selectedRam,
+          selectedStorage: item.selectedStorage,
+        );
+
+        if (itemKey == targetKey) {
+          return Right(item);
+        }
+      }
+      return const Right(null);
+    });
+  }
+
   // Add a product to cart
   Future<Either<String, CartEntity>> addToCart(
     ProductEntity product, {
@@ -22,8 +75,14 @@ class CartUseCase {
     String? selectedStorage,
     int quantity = 1,
   }) async {
-    // Check if product already exists in cart
-    final existingItem = await _repository.getCartItemByProductId(product.id);
+    // Check if product with same configuration already exists in cart
+    final existingItem = await _findExistingCartItem(
+      product.id,
+      selectedVariant: selectedVariant?.name,
+      selectedColor: selectedColor,
+      selectedRam: selectedRam,
+      selectedStorage: selectedStorage,
+    );
 
     return existingItem.fold((error) => Left(error), (existing) async {
       if (existing != null) {
@@ -74,12 +133,12 @@ class CartUseCase {
     });
   }
 
-  // Update cart item quantity
+  // Update cart item quantity by cart item ID (not product ID)
   Future<Either<String, CartEntity>> updateCartItemQuantity(
-    String productId,
+    String cartItemId,
     int quantity,
   ) async {
-    final existingItem = await _repository.getCartItemByProductId(productId);
+    final existingItem = await _repository.getCartItemById(cartItemId);
 
     return existingItem.fold((error) => Left(error), (existing) async {
       if (existing == null) {
@@ -88,7 +147,7 @@ class CartUseCase {
 
       if (quantity <= 0) {
         // Remove item if quantity is 0 or negative
-        final removeResult = await _repository.removeFromCart(productId);
+        final removeResult = await _repository.removeCartItemById(cartItemId);
         return removeResult.fold(
           (error) => Left(error),
           (_) => Left('Item removed from cart'),
@@ -118,7 +177,12 @@ class CartUseCase {
     });
   }
 
-  // Remove a product from cart
+  // Remove a specific cart item by its ID
+  Future<Either<String, void>> removeCartItem(String cartItemId) async {
+    return _repository.removeCartItemById(cartItemId);
+  }
+
+  // Remove a product from cart (legacy method - removes all variants of the product)
   Future<Either<String, void>> removeFromCart(String productId) {
     return _repository.removeFromCart(productId);
   }
@@ -128,7 +192,7 @@ class CartUseCase {
     return _repository.clearCart();
   }
 
-  // Get cart item by product ID
+  // Get cart item by product ID (legacy method - returns first match)
   Future<Either<String, CartEntity?>> getCartItemByProductId(String productId) {
     return _repository.getCartItemByProductId(productId);
   }

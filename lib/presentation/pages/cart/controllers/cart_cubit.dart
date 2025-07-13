@@ -80,11 +80,11 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  Future<void> removeFromCart(String productId) async {
+  Future<void> removeFromCart(String cartItemId) async {
     emit(state.copyWith(status: RequestState.loading));
 
     try {
-      final result = await _cartUseCase.removeFromCart(productId);
+      final result = await _cartUseCase.removeCartItem(cartItemId);
       result.fold(
         (error) => emit(
           state.copyWith(status: RequestState.error, errorMessage: error),
@@ -104,9 +104,9 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  Future<void> updateQuantity(String productId, int quantity) async {
+  Future<void> updateQuantity(String cartItemId, int quantity) async {
     if (quantity <= 0) {
-      await removeFromCart(productId);
+      await removeFromCart(cartItemId);
       return;
     }
 
@@ -114,7 +114,7 @@ class CartCubit extends Cubit<CartState> {
 
     try {
       final result = await _cartUseCase.updateCartItemQuantity(
-        productId,
+        cartItemId,
         quantity,
       );
       result.fold(

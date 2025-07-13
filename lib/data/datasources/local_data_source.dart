@@ -17,8 +17,10 @@ abstract class LocalDataSource {
   Future<CartEntity> addToCart(CartEntity cartItem);
   Future<CartEntity> updateCartItem(CartEntity cartItem);
   Future<void> removeFromCart(String productId);
+  Future<void> removeCartItemById(String cartItemId);
   Future<void> clearCart();
   Future<CartEntity?> getCartItemByProductId(String productId);
+  Future<CartEntity?> getCartItemById(String cartItemId);
 }
 
 class LocalDataSourceImpl implements LocalDataSource {
@@ -147,6 +149,15 @@ class LocalDataSourceImpl implements LocalDataSource {
   }
 
   @override
+  Future<void> removeCartItemById(String cartItemId) async {
+    try {
+      await DatabaseHelper.cartBox.delete(cartItemId);
+    } catch (e) {
+      throw Exception('Failed to remove cart item by ID: $e');
+    }
+  }
+
+  @override
   Future<void> clearCart() async {
     try {
       await DatabaseHelper.cartBox.clear();
@@ -164,6 +175,16 @@ class LocalDataSourceImpl implements LocalDataSource {
         }
       }
       return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<CartEntity?> getCartItemById(String cartItemId) async {
+    try {
+      final cartItem = DatabaseHelper.cartBox.get(cartItemId);
+      return cartItem?.toEntity();
     } catch (e) {
       return null;
     }
