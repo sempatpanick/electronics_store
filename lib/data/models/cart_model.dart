@@ -1,4 +1,5 @@
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
+
 import '../../domain/entities/cart_entity.dart';
 
 part 'cart_model.g.dart';

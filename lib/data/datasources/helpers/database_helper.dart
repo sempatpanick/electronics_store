@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
@@ -39,28 +39,26 @@ class DatabaseHelper {
     print('Starting Hive initialization...');
 
     try {
-      // Initialize Hive
-      await Hive.initFlutter();
-
-      // Register adapters
-      Hive.registerAdapter(CartModelAdapter());
-      Hive.registerAdapter(FavoriteModelAdapter());
-
       // Try to get the application documents directory
       final docsDir = await getApplicationDocumentsDirectory();
       final hiveDir = Directory(path.join(docsDir.path, 'hive'));
-
-      print('Hive directory path: ${hiveDir.path}');
-
-      if (!await hiveDir.exists()) {
-        print('Creating Hive directory...');
-        await hiveDir.create(recursive: true);
-      }
 
       print('Checking directory permissions...');
       final canWrite = await _checkDirectoryPermissions(hiveDir);
       if (!canWrite) {
         throw Exception('Cannot write to documents directory');
+      }
+
+      // Initialize Hive
+      Hive.init(hiveDir.path);
+
+      // Register adapters;
+      Hive.registerAdapter(CartModelAdapter());
+      Hive.registerAdapter(FavoriteModelAdapter());
+
+      if (!await hiveDir.exists()) {
+        print('Creating Hive directory...');
+        await hiveDir.create(recursive: true);
       }
 
       // Open boxes

@@ -8,7 +8,7 @@ part of 'favorite_model.dart';
 
 class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
   @override
-  final int typeId = 1;
+  final typeId = 1;
 
   @override
   FavoriteModel read(BinaryReader reader) {
@@ -17,15 +17,15 @@ class FavoriteModelAdapter extends TypeAdapter<FavoriteModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return FavoriteModel(
-      id: fields[0] as String,
+      id: fields[0] == null ? '' : fields[0] as String,
       productId: fields[1] as String,
       productName: fields[2] as String,
       brand: fields[3] as String,
       category: fields[4] as String,
-      price: fields[5] as double,
+      price: (fields[5] as num).toDouble(),
       image: fields[6] as String?,
-      rating: fields[7] as double,
-      reviews: fields[8] as int,
+      rating: (fields[7] as num).toDouble(),
+      reviews: (fields[8] as num).toInt(),
       description: fields[9] as String,
       inStock: fields[10] as bool,
       addedAt: fields[11] as DateTime,
