@@ -91,6 +91,14 @@ class MainContent extends StatelessWidget {
                 children: [
                   _buildMoreOptionCard(
                     context,
+                    icon: Icons.login,
+                    title: 'Login',
+                    onTap: () {
+                      NavigationService.goToLogin(context);
+                    },
+                  ),
+                  _buildMoreOptionCard(
+                    context,
                     icon: Icons.person_outline,
                     title: 'Profile',
                     onTap: () {
@@ -141,6 +149,15 @@ class MainContent extends StatelessWidget {
               )
             : Column(
                 children: [
+                  _buildMoreOption(
+                    context,
+                    icon: Icons.login,
+                    title: 'Login',
+                    subtitle: 'Sign in to your account',
+                    onTap: () {
+                      NavigationService.goToLogin(context);
+                    },
+                  ),
                   _buildMoreOption(
                     context,
                     icon: Icons.person_outline,

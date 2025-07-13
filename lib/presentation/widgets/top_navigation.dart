@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/colors.dart';
+import '../../common/navigation_service.dart';
 import '../pages/main/controllers/main_cubit.dart';
 
 class TopNavigation extends StatelessWidget {
@@ -175,8 +176,24 @@ class TopNavigation extends StatelessWidget {
                   ],
                 ),
               ),
+              const PopupMenuItem(
+                value: 'login',
+                child: Row(
+                  children: [
+                    Icon(Icons.login, color: kPrimaryColor),
+                    SizedBox(width: 8),
+                    Text('Login', style: TextStyle(color: kPrimaryColor)),
+                  ],
+                ),
+              ),
             ],
-            onSelected: (value) {},
+            onSelected: (value) {
+              switch (value) {
+                case 'login':
+                  NavigationService.goToLogin(context);
+                  break;
+              }
+            },
           ),
         ),
       ],
