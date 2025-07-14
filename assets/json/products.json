@@ -13,7 +13,7 @@
       "https://example.com/iphone15pro_3.jpg"
     ],
     "rating": 4.8,
-    "reviews_count": 1247,
+    "reviewsCount": 1247,
     "description": "The iPhone 15 Pro features the A17 Pro chip, the most advanced chip ever in a smartphone. With a titanium design, pro camera system, and all-day battery life, it's the ultimate iPhone for professionals.",
     "specifications": {
       "Display": "6.1-inch Super Retina XDR display",
@@ -101,7 +101,7 @@
       "https://example.com/galaxys24_3.jpg"
     ],
     "rating": 4.7,
-    "reviews_count": 892,
+    "reviewsCount": 892,
     "description": "Premium Android flagship with AI features. The Samsung Galaxy S24 offers cutting-edge technology with advanced AI capabilities, stunning display, and exceptional performance.",
     "specifications": {
       "Display": "6.2-inch Dynamic AMOLED 2X display",
@@ -156,7 +156,7 @@
       "https://example.com/macbookpro_3.jpg"
     ],
     "rating": 4.9,
-    "reviews_count": 567,
+    "reviewsCount": 567,
     "description": "The MacBook Pro 14-inch with M3 chip delivers exceptional performance for professionals. With up to 22 hours of battery life and a stunning Liquid Retina XDR display.",
     "specifications": {
       "Display": "14.2-inch Liquid Retina XDR display",
@@ -206,7 +206,7 @@
       "https://example.com/dellxps13_2.jpg"
     ],
     "rating": 4.6,
-    "reviews_count": 423,
+    "reviewsCount": 423,
     "description": "Ultra-thin premium laptop with stunning InfinityEdge display. The Dell XPS 13 offers exceptional performance in a compact, elegant design perfect for professionals on the go.",
     "specifications": {
       "Display": "13.4-inch InfinityEdge display",
@@ -247,7 +247,7 @@
       "https://example.com/sonywh1000xm5_2.jpg"
     ],
     "rating": 4.8,
-    "reviews_count": 2156,
+    "reviewsCount": 2156,
     "description": "Premium noise-canceling headphones with industry-leading sound quality. The Sony WH-1000XM5 delivers exceptional audio performance with advanced noise cancellation technology.",
     "specifications": {
       "Driver": "30mm dynamic driver",
@@ -297,7 +297,7 @@
       "https://example.com/airpodspro_2.jpg"
     ],
     "rating": 4.7,
-    "reviews_count": 3421,
+    "reviewsCount": 3421,
     "description": "Wireless earbuds with active noise cancellation and spatial audio. The AirPods Pro deliver immersive sound with seamless integration with Apple devices.",
     "specifications": {
       "Driver": "Custom high-excursion driver",
@@ -347,7 +347,7 @@
       "https://example.com/ipadair_2.jpg"
     ],
     "rating": 4.6,
-    "reviews_count": 789,
+    "reviewsCount": 789,
     "description": "Powerful tablet for work and creativity. The iPad Air with M1 chip offers desktop-class performance in a portable tablet form factor.",
     "specifications": {
       "Display": "10.9-inch Liquid Retina display",
@@ -391,7 +391,7 @@
       "https://example.com/galaxytabs9_2.jpg"
     ],
     "rating": 4.5,
-    "reviews_count": 456,
+    "reviewsCount": 456,
     "description": "Premium Android tablet with S Pen. The Samsung Galaxy Tab S9 offers exceptional performance with the included S Pen for productivity and creativity.",
     "specifications": {
       "Display": "11-inch Dynamic AMOLED 2X display",
@@ -435,7 +435,7 @@
       "https://example.com/nintendoswitch_2.jpg"
     ],
     "rating": 4.7,
-    "reviews_count": 1892,
+    "reviewsCount": 1892,
     "description": "Hybrid gaming console with OLED screen. The Nintendo Switch OLED offers enhanced visuals with a vibrant 7-inch OLED display and improved audio.",
     "specifications": {
       "Display": "7-inch OLED screen",
@@ -484,7 +484,7 @@
       "https://example.com/ps5_2.jpg"
     ],
     "rating": 4.8,
-    "reviews_count": 2341,
+    "reviewsCount": 2341,
     "description": "Next-gen gaming console with lightning-fast loading and stunning graphics. The PlayStation 5 delivers immersive gaming experiences with ray tracing and 3D audio.",
     "specifications": {
       "Processor": "AMD Zen 2 CPU",
@@ -536,7 +536,7 @@
       "https://example.com/canoneosr6_2.jpg"
     ],
     "rating": 4.9,
-    "reviews_count": 234,
+    "reviewsCount": 234,
     "description": "Full-frame mirrorless camera with exceptional performance. The Canon EOS R6 offers professional-grade photography and videography capabilities in a compact form factor.",
     "specifications": {
       "Sensor": "20.1MP full-frame CMOS",
@@ -586,7 +586,7 @@
       "https://example.com/goprohero11_2.jpg"
     ],
     "rating": 4.6,
-    "reviews_count": 567,
+    "reviewsCount": 567,
     "description": "Action camera for adventures. The GoPro Hero 11 captures stunning 5.3K video and 27MP photos with advanced stabilization and waterproof design.",
     "specifications": {
       "Sensor": "27MP sensor",

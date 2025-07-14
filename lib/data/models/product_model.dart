@@ -1,6 +1,12 @@
+import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
+
 import '../../domain/entities/product_entity.dart';
 
-class ProductModel {
+part 'product_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class ProductModel extends Equatable {
   final String id;
   final String name;
   final String brand;
@@ -19,9 +25,10 @@ class ProductModel {
   final List<String>? storageOptions;
   final bool inStock;
   final int? stockCount;
+  @JsonKey(name: 'reviews')
   final List<ProductReviewModel> reviewsList;
 
-  ProductModel({
+  const ProductModel({
     required this.id,
     required this.name,
     required this.brand,
@@ -43,167 +50,135 @@ class ProductModel {
     required this.reviewsList,
   });
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      brand: json['brand'] as String,
-      category: json['category'] as String,
-      price: (json['price'] as num).toDouble(),
-      originalPrice: json['originalPrice'] != null
-          ? (json['originalPrice'] as num).toDouble()
-          : null,
-      image: json['image'] as String?,
-      images: List<String>.from(json['images'] as List),
-      rating: (json['rating'] as num).toDouble(),
-      reviewsCount: json['reviews_count'] as int,
-      description: json['description'] as String,
-      specifications: Map<String, String>.from(json['specifications'] as Map),
-      variants: json['variants'] != null
-          ? (json['variants'] as List)
-              .map((v) =>
-                  ProductVariantModel.fromJson(v as Map<String, dynamic>))
-              .toList()
-          : null,
-      colors: json['colors'] != null
-          ? List<String>.from(json['colors'] as List)
-          : null,
-      ramOptions: json['ramOptions'] != null
-          ? List<String>.from(json['ramOptions'] as List)
-          : null,
-      storageOptions: json['storageOptions'] != null
-          ? List<String>.from(json['storageOptions'] as List)
-          : null,
-      inStock: json['inStock'] as bool,
-      stockCount: json['stockCount'] as int?,
-      reviewsList: (json['reviews'] as List)
-          .map((r) => ProductReviewModel.fromJson(r as Map<String, dynamic>))
-          .toList(),
-    );
-  }
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'brand': brand,
-      'category': category,
-      'price': price,
-      'originalPrice': originalPrice,
-      'image': image,
-      'images': images,
-      'rating': rating,
-      'reviews_count': reviewsCount,
-      'description': description,
-      'specifications': specifications,
-      'variants': variants?.map((v) => v.toJson()).toList(),
-      'colors': colors,
-      'ramOptions': ramOptions,
-      'storageOptions': storageOptions,
-      'inStock': inStock,
-      'stockCount': stockCount,
-      'reviews': reviewsList.map((r) => r.toJson()).toList(),
-    };
-  }
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 
-  ProductEntity toEntity() {
-    return ProductEntity(
-      id: id,
-      name: name,
-      brand: brand,
-      category: category,
-      price: price,
-      originalPrice: originalPrice,
-      image: image,
-      images: images,
-      rating: rating,
-      reviewsCount: reviewsCount,
-      description: description,
-      specifications: specifications,
-      variants: variants?.map((v) => v.toEntity()).toList(),
-      colors: colors,
-      ramOptions: ramOptions,
-      storageOptions: storageOptions,
-      inStock: inStock,
-      stockCount: stockCount,
-      reviewsList: reviewsList.map((r) => r.toEntity()).toList(),
-    );
-  }
+  ProductModel copyWith({
+    String? id,
+    String? name,
+    String? brand,
+    String? category,
+    double? price,
+    double? originalPrice,
+    String? image,
+    List<String>? images,
+    double? rating,
+    int? reviewsCount,
+    String? description,
+    Map<String, String>? specifications,
+    List<ProductVariantModel>? variants,
+    List<String>? colors,
+    List<String>? ramOptions,
+    List<String>? storageOptions,
+    bool? inStock,
+    int? stockCount,
+    List<ProductReviewModel>? reviewsList,
+  }) => ProductModel(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    brand: brand ?? this.brand,
+    category: category ?? this.category,
+    price: price ?? this.price,
+    originalPrice: originalPrice ?? this.originalPrice,
+    image: image ?? this.image,
+    images: images ?? this.images,
+    rating: rating ?? this.rating,
+    reviewsCount: reviewsCount ?? this.reviewsCount,
+    description: description ?? this.description,
+    specifications: specifications ?? this.specifications,
+    variants: variants ?? this.variants,
+    colors: colors ?? this.colors,
+    ramOptions: ramOptions ?? this.ramOptions,
+    storageOptions: storageOptions ?? this.storageOptions,
+    inStock: inStock ?? this.inStock,
+    stockCount: stockCount ?? this.stockCount,
+    reviewsList: reviewsList ?? this.reviewsList,
+  );
 
-  factory ProductModel.fromEntity(ProductEntity entity) {
-    return ProductModel(
-      id: entity.id,
-      name: entity.name,
-      brand: entity.brand,
-      category: entity.category,
-      price: entity.price,
-      originalPrice: entity.originalPrice,
-      image: entity.image,
-      images: entity.images,
-      rating: entity.rating,
-      reviewsCount: entity.reviewsCount,
-      description: entity.description,
-      specifications: entity.specifications,
-      variants: entity.variants
-          ?.map((v) => ProductVariantModel.fromEntity(v))
-          .toList(),
-      colors: entity.colors,
-      ramOptions: entity.ramOptions,
-      storageOptions: entity.storageOptions,
-      inStock: entity.inStock,
-      stockCount: entity.stockCount,
-      reviewsList: entity.reviewsList
-          .map((r) => ProductReviewModel.fromEntity(r))
-          .toList(),
-    );
-  }
+  ProductEntity toEntity() => ProductEntity(
+    id: id,
+    name: name,
+    brand: brand,
+    category: category,
+    price: price,
+    originalPrice: originalPrice,
+    image: image,
+    images: images,
+    rating: rating,
+    reviewsCount: reviewsCount,
+    description: description,
+    specifications: specifications,
+    variants: variants?.map((v) => v.toEntity()).toList(),
+    colors: colors,
+    ramOptions: ramOptions,
+    storageOptions: storageOptions,
+    inStock: inStock,
+    stockCount: stockCount,
+    reviewsList: reviewsList.map((r) => r.toEntity()).toList(),
+  );
+
+  @override
+  List<Object?> get props => [
+    id,
+    name,
+    brand,
+    category,
+    price,
+    originalPrice,
+    image,
+    images,
+    rating,
+    reviewsCount,
+    description,
+    specifications,
+    variants,
+    colors,
+    ramOptions,
+    storageOptions,
+    inStock,
+    stockCount,
+    reviewsList,
+  ];
 }
 
-class ProductVariantModel {
+@JsonSerializable(explicitToJson: true)
+class ProductVariantModel extends Equatable {
   final String name;
   final double price;
   final bool available;
 
-  ProductVariantModel({
+  const ProductVariantModel({
     required this.name,
     required this.price,
     required this.available,
   });
 
-  factory ProductVariantModel.fromJson(Map<String, dynamic> json) {
-    return ProductVariantModel(
-      name: json['name'] as String,
-      price: (json['price'] as num).toDouble(),
-      available: json['available'] as bool,
-    );
-  }
+  factory ProductVariantModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductVariantModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'price': price,
-      'available': available,
-    };
-  }
+  Map<String, dynamic> toJson() => _$ProductVariantModelToJson(this);
 
-  ProductVariantEntity toEntity() {
-    return ProductVariantEntity(
-      name: name,
-      price: price,
-      available: available,
-    );
-  }
+  ProductVariantModel copyWith({
+    String? name,
+    double? price,
+    bool? available,
+  }) => ProductVariantModel(
+    name: name ?? this.name,
+    price: price ?? this.price,
+    available: available ?? this.available,
+  );
 
-  factory ProductVariantModel.fromEntity(ProductVariantEntity entity) {
-    return ProductVariantModel(
-      name: entity.name,
-      price: entity.price,
-      available: entity.available,
-    );
-  }
+  ProductVariantEntity toEntity() =>
+      ProductVariantEntity(name: name, price: price, available: available);
+
+  @override
+  List<Object?> get props => [name, price, available];
 }
 
-class ProductReviewModel {
+@JsonSerializable(explicitToJson: true)
+class ProductReviewModel extends Equatable {
   final String id;
   final String user;
   final int rating;
@@ -212,7 +187,7 @@ class ProductReviewModel {
   final String comment;
   final bool verified;
 
-  ProductReviewModel({
+  const ProductReviewModel({
     required this.id,
     required this.user,
     required this.rating,
@@ -222,51 +197,39 @@ class ProductReviewModel {
     required this.verified,
   });
 
-  factory ProductReviewModel.fromJson(Map<String, dynamic> json) {
-    return ProductReviewModel(
-      id: json['id'] as String,
-      user: json['user'] as String,
-      rating: json['rating'] as int,
-      date: json['date'] as String,
-      title: json['title'] as String,
-      comment: json['comment'] as String,
-      verified: json['verified'] as bool,
-    );
-  }
+  factory ProductReviewModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductReviewModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'user': user,
-      'rating': rating,
-      'date': date,
-      'title': title,
-      'comment': comment,
-      'verified': verified,
-    };
-  }
+  Map<String, dynamic> toJson() => _$ProductReviewModelToJson(this);
 
-  ProductReviewEntity toEntity() {
-    return ProductReviewEntity(
-      id: id,
-      user: user,
-      rating: rating,
-      date: date,
-      title: title,
-      comment: comment,
-      verified: verified,
-    );
-  }
+  ProductReviewModel copyWith({
+    String? id,
+    String? user,
+    int? rating,
+    String? date,
+    String? title,
+    String? comment,
+    bool? verified,
+  }) => ProductReviewModel(
+    id: id ?? this.id,
+    user: user ?? this.user,
+    rating: rating ?? this.rating,
+    date: date ?? this.date,
+    title: title ?? this.title,
+    comment: comment ?? this.comment,
+    verified: verified ?? this.verified,
+  );
 
-  factory ProductReviewModel.fromEntity(ProductReviewEntity entity) {
-    return ProductReviewModel(
-      id: entity.id,
-      user: entity.user,
-      rating: entity.rating,
-      date: entity.date,
-      title: entity.title,
-      comment: entity.comment,
-      verified: entity.verified,
-    );
-  }
+  ProductReviewEntity toEntity() => ProductReviewEntity(
+    id: id,
+    user: user,
+    rating: rating,
+    date: date,
+    title: title,
+    comment: comment,
+    verified: verified,
+  );
+
+  @override
+  List<Object?> get props => [id, user, rating, date, title, comment, verified];
 }

@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../data/models/product_model.dart';
+
 class ProductEntity extends Equatable {
   final String id;
   final String name;
@@ -43,28 +45,50 @@ class ProductEntity extends Equatable {
     required this.reviewsList,
   });
 
+  ProductModel toModel() => ProductModel(
+    id: id,
+    name: name,
+    brand: brand,
+    category: category,
+    price: price,
+    originalPrice: originalPrice,
+    image: image,
+    images: images,
+    rating: rating,
+    reviewsCount: reviewsCount,
+    description: description,
+    specifications: specifications,
+    variants: variants?.map((v) => v.toModel()).toList(),
+    colors: colors,
+    ramOptions: ramOptions,
+    storageOptions: storageOptions,
+    inStock: inStock,
+    stockCount: stockCount,
+    reviewsList: reviewsList.map((r) => r.toModel()).toList(),
+  );
+
   @override
   List<Object?> get props => [
-        id,
-        name,
-        brand,
-        category,
-        price,
-        originalPrice,
-        image,
-        images,
-        rating,
-        reviewsCount,
-        description,
-        specifications,
-        variants,
-        colors,
-        ramOptions,
-        storageOptions,
-        inStock,
-        stockCount,
-        reviewsList,
-      ];
+    id,
+    name,
+    brand,
+    category,
+    price,
+    originalPrice,
+    image,
+    images,
+    rating,
+    reviewsCount,
+    description,
+    specifications,
+    variants,
+    colors,
+    ramOptions,
+    storageOptions,
+    inStock,
+    stockCount,
+    reviewsList,
+  ];
 }
 
 class ProductVariantEntity extends Equatable {
@@ -77,6 +101,9 @@ class ProductVariantEntity extends Equatable {
     required this.price,
     required this.available,
   });
+
+  ProductVariantModel toModel() =>
+      ProductVariantModel(name: name, price: price, available: available);
 
   @override
   List<Object?> get props => [name, price, available];
@@ -101,14 +128,16 @@ class ProductReviewEntity extends Equatable {
     required this.verified,
   });
 
+  ProductReviewModel toModel() => ProductReviewModel(
+    id: id,
+    user: user,
+    rating: rating,
+    date: date,
+    title: title,
+    comment: comment,
+    verified: verified,
+  );
+
   @override
-  List<Object?> get props => [
-        id,
-        user,
-        rating,
-        date,
-        title,
-        comment,
-        verified,
-      ];
+  List<Object?> get props => [id, user, rating, date, title, comment, verified];
 }
